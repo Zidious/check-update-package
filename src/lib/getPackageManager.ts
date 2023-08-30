@@ -1,4 +1,3 @@
-import * as core from "@actions/core";
 import fs from "fs";
 import path from "path";
 
@@ -25,13 +24,6 @@ export const getPackageManager = (packageJsonPath?: string): PackageManager => {
   const packageLock = packageJsonPath
     ? path.join(packageJsonPath, LockFile.NPM)
     : LockFile.NPM;
-
-  core.info(`Checking for yarn.lock at ${yarnLock}`);
-  core.info(`Checking for package-lock.json at ${packageLock}`);
-
-  // log if yarn.lock or package-lock.json exists
-  core.info(`yarn.lock exists: ${fs.existsSync(yarnLock)}`);
-  core.info(`package-lock.json exists: ${fs.existsSync(packageLock)}`);
 
   if (fs.existsSync(yarnLock)) {
     return PackageManager.YARN;
