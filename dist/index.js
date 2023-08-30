@@ -4106,8 +4106,8 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     }
     const packageJson = fs_1.default.readFileSync("package.json", "utf8");
     const packageJsonParsed = JSON.parse(packageJson);
-    const dep = packageJsonParsed.dependencies;
-    const devDep = packageJsonParsed.devDependencies;
+    const dep = packageJsonParsed.dependencies?.[packageName];
+    const devDep = packageJsonParsed.devDependencies?.[packageName];
     // log out everything above
     core.info(`packageJson: ${packageJson}`);
     core.info(`packageJsonParsed: ${packageJsonParsed}`);

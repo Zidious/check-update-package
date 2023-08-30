@@ -3,8 +3,8 @@ import { PackageManager, getPackageManager } from "./getPackageManager";
 import fs from "fs";
 
 interface PackageJsonProps {
-  dependencies: Record<string, string>;
-  devDependencies: Record<string, string>;
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
 }
 
 interface CurrentPackageInfoParams {
@@ -33,8 +33,8 @@ const currentPackageInfo = async ({
 
   const packageJson = fs.readFileSync("package.json", "utf8");
   const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
-  const dep = packageJsonParsed.dependencies;
-  const devDep = packageJsonParsed.devDependencies;
+  const dep = packageJsonParsed.dependencies?.[packageName];
+  const devDep = packageJsonParsed.devDependencies?.[packageName];
 
   // log out everything above
   core.info(`packageJson: ${packageJson}`);
