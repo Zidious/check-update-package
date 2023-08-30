@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import { PackageManager, getPackageManager } from "./getPackageManager";
 import fs from "fs";
 
@@ -34,6 +35,12 @@ const currentPackageInfo = async ({
   const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
   const dep = packageJsonParsed.dependencies[packageName];
   const devDep = packageJsonParsed.devDependencies[packageName];
+
+  // log out everything above
+  core.info(`packageJson: ${packageJson}`);
+  core.info(`packageJsonParsed: ${packageJsonParsed}`);
+  core.info(`dep: ${dep}`);
+  core.info(`devDep: ${devDep}`);
 
   let packageVersion: string | null = null;
   let isDevDependency = false;
