@@ -1,0 +1,16 @@
+name: "check-update-package"
+description: "Check if a package has a new version available and install it if so."
+author: "Gabe Olesen"
+
+inputs:
+  package_name:
+    description: "The name of the package to check for updates."
+    required: true
+  package_directory:
+    description: "The directory where the package is installed."
+    required: false
+    default: "."
+
+runs:
+  using: "node18"
+  main: "dist/index.js"

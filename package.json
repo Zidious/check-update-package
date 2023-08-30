@@ -1,0 +1,22 @@
+{
+  "name": "check-update-package",
+  "version": "1.0.0",
+  "description": "Update package to latest version if it's required",
+  "main": "dist/index.js",
+  "author": "Gabe Olesen",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "build:packaged": "ncc build src/index.ts"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "@vercel/ncc": "^0.36.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}
