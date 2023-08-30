@@ -33,7 +33,6 @@ const main = async () => {
   );
 
   const isLatest = areVersionsEqual(packageVersion, latestVersion);
-
   if (isLatest) {
     core.info(
       `The package ${packageName} is up to date at version ${packageVersion}...`,

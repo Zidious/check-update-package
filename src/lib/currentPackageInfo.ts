@@ -35,14 +35,16 @@ const currentPackageInfo = async ({
 
   const packageJson = fs.readFileSync(path, "utf8");
   const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
+  const dep = packageJsonParsed.dependencies[packageName];
+  const devDep = packageJsonParsed.devDependencies[packageName];
 
   let packageVersion: string | null = null;
   let isDevDependency = false;
 
-  if (packageJsonParsed.dependencies[packageName]) {
-    packageVersion = packageJsonParsed.dependencies[packageName];
-  } else if (packageJsonParsed.devDependencies[packageName]) {
-    packageVersion = packageJsonParsed.devDependencies[packageName];
+  if (dep) {
+    packageVersion = dep;
+  } else if (devDep) {
+    packageVersion = devDep;
     isDevDependency = true;
   } else {
     throw new Error(

@@ -15,7 +15,6 @@ const getLatestPackageVersion = async (
   const packageManager =
     package_manager === PackageManager.NPM ? "npm" : "yarn";
   const viewCommand = package_manager === PackageManager.NPM ? "view" : "info";
-
   const latestVersion = (
     await exec.getExecOutput(packageManager, [
       viewCommand,
