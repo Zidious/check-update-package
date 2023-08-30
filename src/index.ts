@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import path from "path";
 import doesPackageDirExist from "./lib/doesPackageDirExist";
 import getLatestPackageVersion from "./lib/getLatestPackageVersion";
 import currentPackageInfo from "./lib/currentPackageInfo";
@@ -20,7 +21,7 @@ const main = async () => {
   }
 
   core.info(`Checking for updates for ${packageName}...`);
-  process.chdir(packageDirectory);
+  process.chdir(path.resolve(packageDirectory));
 
   const { packageVersion, isDevDependency, packageManager } =
     await currentPackageInfo({
