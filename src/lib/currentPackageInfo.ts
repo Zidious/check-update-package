@@ -26,14 +26,11 @@ const currentPackageInfo = async ({
   packageDirectory,
   packageName,
 }: CurrentPackageInfoParams): Promise<CurrentPackageInfoReturn> => {
-  const path = `${packageDirectory}/package.json`;
-  const doesExist = fs.existsSync(path);
-
-  if (!doesExist) {
+  if (!fs.existsSync("package.json")) {
     throw new Error(`Unable to find package.json in ${packageDirectory}`);
   }
 
-  const packageJson = fs.readFileSync(path, "utf8");
+  const packageJson = fs.readFileSync("package.json", "utf8");
   const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
   const dep = packageJsonParsed.dependencies[packageName];
   const devDep = packageJsonParsed.devDependencies[packageName];
