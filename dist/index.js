@@ -4263,8 +4263,12 @@ var LockFile;
  * @returns PackageManager The package manager used by the package
  */
 const getPackageManager = (packageJsonPath) => {
-    const yarnLock = path_1.default.join(packageJsonPath, LockFile.YARN);
-    const packageLock = path_1.default.join(packageJsonPath, LockFile.NPM);
+    const yarnLock = packageJsonPath
+        ? path_1.default.join(packageJsonPath, LockFile.YARN)
+        : LockFile.YARN;
+    const packageLock = packageJsonPath
+        ? path_1.default.join(packageJsonPath, LockFile.NPM)
+        : LockFile.NPM;
     core.info(`Checking for yarn.lock at ${yarnLock}`);
     core.info(`Checking for package-lock.json at ${packageLock}`);
     // log if yarn.lock or package-lock.json exists

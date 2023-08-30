@@ -18,9 +18,13 @@ enum LockFile {
  * @returns PackageManager The package manager used by the package
  */
 
-export const getPackageManager = (packageJsonPath: string): PackageManager => {
-  const yarnLock = path.join(packageJsonPath, LockFile.YARN);
-  const packageLock = path.join(packageJsonPath, LockFile.NPM);
+export const getPackageManager = (packageJsonPath?: string): PackageManager => {
+  const yarnLock = packageJsonPath
+    ? path.join(packageJsonPath, LockFile.YARN)
+    : LockFile.YARN;
+  const packageLock = packageJsonPath
+    ? path.join(packageJsonPath, LockFile.NPM)
+    : LockFile.NPM;
 
   core.info(`Checking for yarn.lock at ${yarnLock}`);
   core.info(`Checking for package-lock.json at ${packageLock}`);
