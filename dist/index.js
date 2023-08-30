@@ -4324,14 +4324,11 @@ const getPackageManager_1 = __nccwpck_require__(2951);
 const installPackage = async ({ packageName, packageVersion, packageManager, isDevDependency, }) => {
     const packageManagerCommand = packageManager === getPackageManager_1.PackageManager.NPM ? "npm" : "yarn";
     const installCommand = packageManager === getPackageManager_1.PackageManager.NPM ? "install" : "add";
-    const res = await exec.exec(packageManagerCommand, [
+    await exec.exec(packageManagerCommand, [
         installCommand,
-        isDevDependency ? "-D" : "",
+        // isDevDependency ? "-D" : "",
         `${packageName}@${packageVersion}`,
     ]);
-    if (res !== 0) {
-        throw new Error(`Failed to install ${packageName}@${packageVersion}`);
-    }
 };
 exports["default"] = installPackage;
 

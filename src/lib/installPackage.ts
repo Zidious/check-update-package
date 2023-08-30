@@ -19,15 +19,11 @@ const installPackage = async ({
   const installCommand =
     packageManager === PackageManager.NPM ? "install" : "add";
 
-  const res = await exec.exec(packageManagerCommand, [
+  await exec.exec(packageManagerCommand, [
     installCommand,
-    isDevDependency ? "-D" : "",
+    // isDevDependency ? "-D" : "",
     `${packageName}@${packageVersion}`,
   ]);
-
-  if (res !== 0) {
-    throw new Error(`Failed to install ${packageName}@${packageVersion}`);
-  }
 };
 
 export default installPackage;
