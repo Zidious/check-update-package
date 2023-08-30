@@ -4267,6 +4267,9 @@ const getPackageManager = (packageJsonPath) => {
     const packageLock = path_1.default.join(packageJsonPath, LockFile.NPM);
     core.info(`Checking for yarn.lock at ${yarnLock}`);
     core.info(`Checking for package-lock.json at ${packageLock}`);
+    // log if yarn.lock or package-lock.json exists
+    core.info(`yarn.lock exists: ${fs_1.default.existsSync(yarnLock)}`);
+    core.info(`package-lock.json exists: ${fs_1.default.existsSync(packageLock)}`);
     if (fs_1.default.existsSync(yarnLock)) {
         return PackageManager.YARN;
     }

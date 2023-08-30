@@ -25,6 +25,10 @@ export const getPackageManager = (packageJsonPath: string): PackageManager => {
   core.info(`Checking for yarn.lock at ${yarnLock}`);
   core.info(`Checking for package-lock.json at ${packageLock}`);
 
+  // log if yarn.lock or package-lock.json exists
+  core.info(`yarn.lock exists: ${fs.existsSync(yarnLock)}`);
+  core.info(`package-lock.json exists: ${fs.existsSync(packageLock)}`);
+
   if (fs.existsSync(yarnLock)) {
     return PackageManager.YARN;
   } else if (fs.existsSync(packageLock)) {
