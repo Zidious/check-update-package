@@ -50,7 +50,7 @@ const currentPackageInfo = async ({
     );
   }
 
-  const packageManager = getPackageManager(packageDirectory);
+  const packageManager = getPackageManager();
 
   core.info(`packageManager: ${packageManager}`);
   return {

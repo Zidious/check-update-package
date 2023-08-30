@@ -4120,7 +4120,7 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     else {
         throw new Error(`Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`);
     }
-    const packageManager = (0, getPackageManager_1.getPackageManager)(packageDirectory);
+    const packageManager = (0, getPackageManager_1.getPackageManager)();
     core.info(`packageManager: ${packageManager}`);
     return {
         packageVersion: "1",
