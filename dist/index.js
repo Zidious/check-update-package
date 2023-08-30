@@ -4322,13 +4322,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const exec = __importStar(__nccwpck_require__(1514));
 const getPackageManager_1 = __nccwpck_require__(2951);
 const installPackage = async ({ packageName, packageVersion, packageManager, isDevDependency, }) => {
-    const packageManagerCommand = packageManager === getPackageManager_1.PackageManager.NPM ? "npm" : "yarn";
-    const installCommand = packageManager === getPackageManager_1.PackageManager.NPM ? "install" : "add";
-    await exec.exec(packageManagerCommand, [
-        installCommand,
-        isDevDependency ? "-D" : "",
-        `${packageName}@${packageVersion}`,
-    ]);
+    const command = packageManager === getPackageManager_1.PackageManager.NPM ? "npm" : "yarn";
+    const subCommand = packageManager === getPackageManager_1.PackageManager.NPM ? "install" : "add";
+    const args = isDevDependency ? [subCommand, "-D"] : [subCommand];
+    await exec.exec(command, [...args, `${packageName}@${packageVersion}`]);
 };
 exports["default"] = installPackage;
 

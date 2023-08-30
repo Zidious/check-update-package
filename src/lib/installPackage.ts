@@ -14,16 +14,11 @@ const installPackage = async ({
   packageManager,
   isDevDependency,
 }: InstallPackageParams): Promise<void> => {
-  const packageManagerCommand =
-    packageManager === PackageManager.NPM ? "npm" : "yarn";
-  const installCommand =
-    packageManager === PackageManager.NPM ? "install" : "add";
+  const command = packageManager === PackageManager.NPM ? "npm" : "yarn";
+  const subCommand = packageManager === PackageManager.NPM ? "install" : "add";
+  const args = isDevDependency ? [subCommand, "-D"] : [subCommand];
 
-  await exec.exec(packageManagerCommand, [
-    installCommand,
-    isDevDependency ? "-D" : "",
-    `${packageName}@${packageVersion}`,
-  ]);
+  await exec.exec(command, [...args, `${packageName}@${packageVersion}`]);
 };
 
 export default installPackage;
