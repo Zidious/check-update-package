@@ -21,7 +21,7 @@ const installPackage = async ({
 
   await exec.exec(packageManagerCommand, [
     installCommand,
-    // isDevDependency ? "-D" : "",
+    isDevDependency ? "-D" : "",
     `${packageName}@${packageVersion}`,
   ]);
 };
