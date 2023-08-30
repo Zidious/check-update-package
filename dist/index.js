@@ -4106,8 +4106,8 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     }
     const packageJson = fs_1.default.readFileSync("package.json", "utf8");
     const packageJsonParsed = JSON.parse(packageJson);
-    const dep = packageJsonParsed.dependencies[packageName];
-    const devDep = packageJsonParsed.devDependencies[packageName];
+    const dep = packageJsonParsed.dependencies;
+    const devDep = packageJsonParsed.devDependencies;
     // log out everything above
     core.info(`packageJson: ${packageJson}`);
     core.info(`packageJsonParsed: ${packageJsonParsed}`);
@@ -4115,19 +4115,19 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     core.info(`devDep: ${devDep}`);
     let packageVersion = null;
     let isDevDependency = false;
-    if (dep) {
-        packageVersion = dep;
-    }
-    else if (devDep) {
-        packageVersion = devDep;
-        isDevDependency = true;
-    }
-    else {
-        throw new Error(`Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`);
-    }
+    // if (dep) {
+    //   packageVersion = dep;
+    // } else if (devDep) {
+    //   packageVersion = devDep;
+    //   isDevDependency = true;
+    // } else {
+    //   throw new Error(
+    //     `Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`,
+    //   );
+    // }
     const packageManager = (0, getPackageManager_1.getPackageManager)(packageDirectory);
     return {
-        packageVersion,
+        packageVersion: "1",
         isDevDependency,
         packageManager,
     };

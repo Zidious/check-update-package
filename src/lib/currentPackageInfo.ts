@@ -33,8 +33,8 @@ const currentPackageInfo = async ({
 
   const packageJson = fs.readFileSync("package.json", "utf8");
   const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
-  const dep = packageJsonParsed.dependencies[packageName];
-  const devDep = packageJsonParsed.devDependencies[packageName];
+  const dep = packageJsonParsed.dependencies;
+  const devDep = packageJsonParsed.devDependencies;
 
   // log out everything above
   core.info(`packageJson: ${packageJson}`);
@@ -45,21 +45,21 @@ const currentPackageInfo = async ({
   let packageVersion: string | null = null;
   let isDevDependency = false;
 
-  if (dep) {
-    packageVersion = dep;
-  } else if (devDep) {
-    packageVersion = devDep;
-    isDevDependency = true;
-  } else {
-    throw new Error(
-      `Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`,
-    );
-  }
+  // if (dep) {
+  //   packageVersion = dep;
+  // } else if (devDep) {
+  //   packageVersion = devDep;
+  //   isDevDependency = true;
+  // } else {
+  //   throw new Error(
+  //     `Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`,
+  //   );
+  // }
 
   const packageManager = getPackageManager(packageDirectory);
 
   return {
-    packageVersion,
+    packageVersion: "1",
     isDevDependency,
     packageManager,
   };
