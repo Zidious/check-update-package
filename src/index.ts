@@ -23,6 +23,8 @@ const main = async () => {
   core.info(`Checking for updates for ${packageName}...`);
   process.chdir(path.resolve(packageDirectory));
 
+  core.info(`Current working directory: ${process.cwd()}`);
+
   const { packageVersion, isDevDependency, packageManager } =
     await currentPackageInfo({
       packageDirectory,
