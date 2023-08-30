@@ -3986,6 +3986,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
+const path_1 = __importDefault(__nccwpck_require__(1017));
 const doesPackageDirExist_1 = __importDefault(__nccwpck_require__(2987));
 const getLatestPackageVersion_1 = __importDefault(__nccwpck_require__(7417));
 const currentPackageInfo_1 = __importDefault(__nccwpck_require__(3432));
@@ -4003,7 +4004,7 @@ const main = async () => {
         return;
     }
     core.info(`Checking for updates for ${packageName}...`);
-    process.chdir(packageDirectory);
+    process.chdir(path_1.default.resolve(packageDirectory));
     const { packageVersion, isDevDependency, packageManager } = await (0, currentPackageInfo_1.default)({
         packageDirectory,
         packageName,
@@ -4075,12 +4076,10 @@ const fs_1 = __importDefault(__nccwpck_require__(7147));
  * @returns - The current package version, whether or not it's a devDependency, and the package manager
  */
 const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
-    const path = `${packageDirectory}/package.json`;
-    const doesExist = fs_1.default.existsSync(path);
-    if (!doesExist) {
+    if (!fs_1.default.existsSync("package.json")) {
         throw new Error(`Unable to find package.json in ${packageDirectory}`);
     }
-    const packageJson = fs_1.default.readFileSync(path, "utf8");
+    const packageJson = fs_1.default.readFileSync("package.json", "utf8");
     const packageJsonParsed = JSON.parse(packageJson);
     const dep = packageJsonParsed.dependencies[packageName];
     const devDep = packageJsonParsed.devDependencies[packageName];
