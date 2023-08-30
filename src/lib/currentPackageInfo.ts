@@ -36,28 +36,23 @@ const currentPackageInfo = async ({
   const dep = packageJsonParsed.dependencies?.[packageName];
   const devDep = packageJsonParsed.devDependencies?.[packageName];
 
-  // log out everything above
-  core.info(`packageJson: ${packageJson}`);
-  core.info(`packageJsonParsed: ${packageJsonParsed}`);
-  core.info(`dep: ${dep}`);
-  core.info(`devDep: ${devDep}`);
-
   let packageVersion: string | null = null;
   let isDevDependency = false;
 
-  // if (dep) {
-  //   packageVersion = dep;
-  // } else if (devDep) {
-  //   packageVersion = devDep;
-  //   isDevDependency = true;
-  // } else {
-  //   throw new Error(
-  //     `Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`,
-  //   );
-  // }
+  if (dep) {
+    packageVersion = dep;
+  } else if (devDep) {
+    packageVersion = devDep;
+    isDevDependency = true;
+  } else {
+    throw new Error(
+      `Unable to find ${packageName} in package.json. Make sure it's installed as a dependency or devDependency`,
+    );
+  }
 
   const packageManager = getPackageManager(packageDirectory);
 
+  core.info(`packageManager: ${packageManager}`);
   return {
     packageVersion: "1",
     isDevDependency,
