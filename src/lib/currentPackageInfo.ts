@@ -54,7 +54,7 @@ const currentPackageInfo = async ({
 
   core.info(`packageManager: ${packageManager}`);
   return {
-    packageVersion: "1",
+    packageVersion,
     isDevDependency,
     packageManager,
   };

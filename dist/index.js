@@ -4123,7 +4123,7 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     const packageManager = (0, getPackageManager_1.getPackageManager)();
     core.info(`packageManager: ${packageManager}`);
     return {
-        packageVersion: "1",
+        packageVersion,
         isDevDependency,
         packageManager,
     };
