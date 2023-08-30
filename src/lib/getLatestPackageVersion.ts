@@ -15,13 +15,15 @@ const getLatestPackageVersion = async (
   const packageManager =
     package_manager === PackageManager.NPM ? "npm" : "yarn";
   const viewCommand = package_manager === PackageManager.NPM ? "view" : "info";
+
+  // get the 2nd line of the output, which is the latest version
   const latestVersion = (
     await exec.getExecOutput(packageManager, [
       viewCommand,
       package_name,
       "version",
     ])
-  ).stdout.trim();
+  ).stdout.split("\n")[1];
 
   return latestVersion;
 };
