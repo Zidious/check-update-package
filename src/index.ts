@@ -20,6 +20,7 @@ const main = async () => {
   }
 
   core.info(`Checking for updates for ${packageName}...`);
+  process.chdir(packageDirectory);
 
   const { packageVersion, isDevDependency, packageManager } =
     await currentPackageInfo({
