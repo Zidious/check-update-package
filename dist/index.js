@@ -4003,6 +4003,7 @@ const main = async () => {
         return;
     }
     core.info(`Checking for updates for ${packageName}...`);
+    process.chdir(packageDirectory);
     const { packageVersion, isDevDependency, packageManager } = await (0, currentPackageInfo_1.default)({
         packageDirectory,
         packageName,
@@ -4081,13 +4082,15 @@ const currentPackageInfo = async ({ packageDirectory, packageName, }) => {
     }
     const packageJson = fs_1.default.readFileSync(path, "utf8");
     const packageJsonParsed = JSON.parse(packageJson);
+    const dep = packageJsonParsed.dependencies[packageName];
+    const devDep = packageJsonParsed.devDependencies[packageName];
     let packageVersion = null;
     let isDevDependency = false;
-    if (packageJsonParsed.dependencies[packageName]) {
-        packageVersion = packageJsonParsed.dependencies[packageName];
+    if (dep) {
+        packageVersion = dep;
     }
-    else if (packageJsonParsed.devDependencies[packageName]) {
-        packageVersion = packageJsonParsed.devDependencies[packageName];
+    else if (devDep) {
+        packageVersion = devDep;
         isDevDependency = true;
     }
     else {
@@ -4168,11 +4171,14 @@ const getPackageManager_1 = __nccwpck_require__(2951);
 const getLatestPackageVersion = async (package_name, package_manager) => {
     const packageManager = package_manager === getPackageManager_1.PackageManager.NPM ? "npm" : "yarn";
     const viewCommand = package_manager === getPackageManager_1.PackageManager.NPM ? "view" : "info";
+    // get the 2nd line of the output, which is the latest version
     const latestVersion = (await exec.getExecOutput(packageManager, [
         viewCommand,
         package_name,
         "version",
-    ])).stdout.trim();
+    ])).stdout
+        .trim()
+        .split("\n")[1];
     return latestVersion;
 };
 exports["default"] = getLatestPackageVersion;

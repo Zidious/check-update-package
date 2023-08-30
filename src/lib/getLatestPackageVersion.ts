@@ -25,8 +25,7 @@ const getLatestPackageVersion = async (
     ])
   ).stdout
     .trim()
-    .split("\n")
-    .pop()!;
+    .split("\n")[1];
 
   return latestVersion;
 };
