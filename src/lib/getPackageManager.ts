@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import fs from "fs";
 import path from "path";
 
@@ -20,6 +21,9 @@ enum LockFile {
 export const getPackageManager = (packageJsonPath: string): PackageManager => {
   const yarnLock = path.join(packageJsonPath, LockFile.YARN);
   const packageLock = path.join(packageJsonPath, LockFile.NPM);
+
+  core.info(`Checking for yarn.lock at ${yarnLock}`);
+  core.info(`Checking for package-lock.json at ${packageLock}`);
 
   if (fs.existsSync(yarnLock)) {
     return PackageManager.YARN;
