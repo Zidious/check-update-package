@@ -3,11 +3,19 @@ name: "build-test"
 on: workflow_dispatch
 
 jobs:
-  test:
+  test-outdated-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./
         with:
           package_name: "cypress"
-          package_directory: "tests"
+          package_directory: "tests/outdated"
+  test-equal-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          package_name: "cypress"
+          package_directory: "tests/equal"
