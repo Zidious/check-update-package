@@ -1,7 +1,4 @@
-export declare enum PackageManager {
-    NPM = "npm",
-    YARN = "yarn"
-}
+import { PackageManager } from "./types";
 /**
  * Get the package manager either NPM or Yarn
  * @param packageJsonPath The path to the package.json file

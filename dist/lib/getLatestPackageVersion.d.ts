@@ -1,4 +1,4 @@
-import { PackageManager } from "./getPackageManager";
+import { PackageManager } from "./types";
 /**
  * Get the latest version of a package
  * @param package_name The name of the package
