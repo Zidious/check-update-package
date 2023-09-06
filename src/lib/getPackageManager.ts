@@ -1,15 +1,6 @@
 import fs from "fs";
 import path from "path";
-
-export enum PackageManager {
-  NPM = "npm",
-  YARN = "yarn",
-}
-
-enum LockFile {
-  NPM = "package-lock.json",
-  YARN = "yarn.lock",
-}
+import { LockFile, PackageManager } from "./types";
 
 /**
  * Get the package manager either NPM or Yarn

@@ -1,12 +1,5 @@
 import * as exec from "@actions/exec";
-import { PackageManager } from "./getPackageManager";
-
-interface InstallPackageParams {
-  packageName: string;
-  packageVersion: string;
-  packageManager: PackageManager;
-  isDevDependency: boolean;
-}
+import { type InstallPackageParams, PackageManager } from "./types";
 
 const installPackage = async ({
   packageName,

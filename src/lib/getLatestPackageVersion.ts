@@ -1,5 +1,5 @@
 import * as exec from "@actions/exec";
-import { PackageManager } from "./getPackageManager";
+import { PackageManager } from "./types";
 
 /**
  * Get the latest version of a package
@@ -15,19 +15,14 @@ const getLatestPackageVersion = async (
   const packageManager =
     package_manager === PackageManager.NPM ? "npm" : "yarn";
   const viewCommand = package_manager === PackageManager.NPM ? "view" : "info";
+  const output = await exec.getExecOutput(packageManager, [
+    viewCommand,
+    package_name,
+    "version",
+  ]);
 
   // get the 2nd line of the output, which is the latest version
-  const latestVersion = (
-    await exec.getExecOutput(packageManager, [
-      viewCommand,
-      package_name,
-      "version",
-    ])
-  ).stdout
-    .trim()
-    .split("\n")[1];
-
-  return latestVersion;
+  return output.stdout.trim().split("\n")[1];
 };
 
 export default getLatestPackageVersion;

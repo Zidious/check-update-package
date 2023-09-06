@@ -1,3 +1,5 @@
+import { compareVersions } from "compare-versions";
+
 /**
  * Compares two versions to see if they are equal
  * @param versionA The first version to compare
@@ -6,20 +8,7 @@
  */
 
 const areVersionsEqual = (versionA: string, versionB: string): boolean => {
-  const a = versionA.split(".").map((v) => parseInt(v));
-  const b = versionB.split(".").map((v) => parseInt(v));
-
-  if (a.length !== b.length) {
-    return false;
-  }
-
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      return false;
-    }
-  }
-
-  return true;
+  return compareVersions(versionA, versionB) === 0;
 };
 
 export default areVersionsEqual;

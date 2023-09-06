@@ -1,22 +1,11 @@
 import * as core from "@actions/core";
-import { PackageManager, getPackageManager } from "./getPackageManager";
+import { getPackageManager } from "./getPackageManager";
 import fs from "fs";
-
-interface PackageJsonProps {
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-}
-
-interface CurrentPackageInfoParams {
-  packageDirectory: string;
-  packageName: string;
-}
-
-interface CurrentPackageInfoReturn {
-  packageVersion: string;
-  isDevDependency: boolean;
-  packageManager: PackageManager;
-}
+import type {
+  CurrentPackageInfoParams,
+  CurrentPackageInfoReturn,
+  PackageJsonProperties,
+} from "./types";
 
 /**
  * Get the current info for a package
@@ -32,7 +21,7 @@ const currentPackageInfo = async ({
   }
 
   const packageJson = fs.readFileSync("package.json", "utf8");
-  const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProps;
+  const packageJsonParsed = JSON.parse(packageJson) as PackageJsonProperties;
   const dep = packageJsonParsed.dependencies?.[packageName];
   const devDep = packageJsonParsed.devDependencies?.[packageName];
 
